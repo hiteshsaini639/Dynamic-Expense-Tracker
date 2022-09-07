@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background-color: #eeeeee;
+}
+ul {
+  list-style: none;
+}
+ul li {
+  padding: 5px;
+  background-color: #fff;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+header {
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: -30px;
+  font-size: 1.1rem;
+  color: #393e46;
+}
+
+h2 {
+  color: #222831;
+}
+
+.box {
+  margin: auto;
+  width: 700px;
+  padding: 3rem 2rem;
+}
+.my-form {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  border: 1px solid #393e46;
+}
+
+option {
+  font-size: 1.1rem;
+}
+
+.btn {
+  color: #fff;
+  width: 100%;
+  padding: 10px 15px;
+  border: 0;
+  background-color: #393e46;
+  border-radius: 5px;
+  margin: 5px 0;
+  font-size: medium;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+.btn:hover {
+  background-color: #222831;
+}
+
+.msg {
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  height: 0px;
+  transition: height 0.25s;
+}
+
+.error {
+  background-color: #c21010;
+  height: 35px;
+}
+.success {
+  background-color: #2b7a0b;
+  height: 35px;
+}
+.btn1 {
+  float: right;
+  padding: 3px 5px;
+  margin-left: 7px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
+}
+
+.edit:hover {
+  color: white;
+  background-color: #2b7a0b;
+}
+
+.del:hover {
+  color: white;
+  background-color: #c21010;
+}
