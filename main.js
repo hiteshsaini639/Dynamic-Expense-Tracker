@@ -9,7 +9,7 @@ const body = document.querySelector("body");
 const btn = document.querySelector(".btn");
 const btndel = document.querySelector(".del");
 const btnedit = document.querySelector(".edit");
-const APIendpoint = "https://crudcrud.com/api/26d25124b882440693f15e1977744889";
+const APIendpoint = "https://crudcrud.com/api/b3572460b8ff4b81b100e1d6f71df430";
 let editing = false;
 let editingLi;
 
@@ -65,7 +65,7 @@ function submit(event) {
         .put(`${APIendpoint}/Expenses/${editingLi.id}`, obj)
         .then((res) => {
           // showing success messege on editing
-          showMsg("Expense edited", "success");
+          showMsg("Expense edited", "edited");
           editingLi.firstChild.textContent = `${obj.amount}-${obj.category}-${obj.description}`;
           resetData();
         })
@@ -106,7 +106,7 @@ function deteteData(e) {
       axios
         .delete(`${APIendpoint}/Expenses/${e.target.parentElement.id}`)
         .then(() => {
-          showMsg("Deleted", "success");
+          showMsg("Deleted", "edited");
           userList.removeChild(e.target.parentElement);
         })
         .catch((err) => showMsg(err.message, "error"));
