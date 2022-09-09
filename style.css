@@ -73,13 +73,16 @@ option {
 .btn:hover {
   background-color: #222831;
 }
+.btn:active {
+  transform: scale(0.99);
+}
 
 .msg {
   color: #fff;
   padding: 5px;
   border-radius: 5px;
   height: 0px;
-  transition: height 0.25s;
+  transition: all 0.25s;
 }
 
 .error {
@@ -95,17 +98,25 @@ option {
   padding: 3px 5px;
   margin-left: 7px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid transparent;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
 }
 
 .edit:hover {
-  color: white;
+  color: #fff;
   background-color: #2b7a0b;
 }
 
+.edit:active {
+  transform: scale(0.93);
+}
+
 .del:hover {
-  color: white;
+  color: #fff;
   background-color: #c21010;
+}
+
+.del:active {
+  transform: scale(0.93);
 }
