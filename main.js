@@ -9,7 +9,8 @@ const body = document.querySelector("body");
 const btn = document.querySelector(".btn");
 const btndel = document.querySelector(".del");
 const btnedit = document.querySelector(".edit");
-const APIendpoint = "https://crudcrud.com/api/b3572460b8ff4b81b100e1d6f71df430";
+const APIendpointURL =
+  "https://crudcrud.com/api/b32e865ae5184c4fb2677da087a0d32c";
 let editing = false;
 let editingLi;
 
@@ -61,40 +62,17 @@ function submit(event) {
 
     if (editing) {
       //Edit expense
-      axios
-        .put(`${APIendpoint}/Expenses/${editingLi.id}`, obj)
-        .then((res) => {
-          // showing success messege on editing
-          showMsg("Expense edited", "edited");
-          editingLi.firstChild.textContent = `${obj.amount}-${obj.category}-${obj.description}`;
-          resetData();
-        })
-        .catch((err) => showMsg(err.message, "error"));
+      postPut(`${APIendpointURL}/Expenses/${editingLi.id}`, "put", obj);
     } else {
       //Add expense
-      axios
-        .post(`${APIendpoint}/Expenses`, obj)
-        .then((res) => {
-          // showing success messege on submitting
-          showMsg("Expense added", "success");
-          showData(res.data);
-          resetData();
-        })
-        .catch((err) => showMsg(err.message, "error"));
+      postPut(`${APIendpointURL}/Expenses`, "post", obj);
     }
   }
 }
 
 // Show data on reload
 function getDataOnLoad() {
-  axios
-    .get(`${APIendpoint}/Expenses`)
-    .then((res) => {
-      for (let i = 0; i < res.data.length; i++) {
-        showData(res.data[i]);
-      }
-    })
-    .catch((err) => showMsg(err.message, "error"));
+  getDelete(`${APIendpointURL}/Expenses`, "get");
   resetData();
 }
 
@@ -103,13 +81,11 @@ function deteteData(e) {
   if (e.target.classList.contains("del")) {
     resetData();
     if (confirm("Are You Sure?")) {
-      axios
-        .delete(`${APIendpoint}/Expenses/${e.target.parentElement.id}`)
-        .then(() => {
-          showMsg("Deleted", "edited");
-          userList.removeChild(e.target.parentElement);
-        })
-        .catch((err) => showMsg(err.message, "error"));
+      getDelete(
+        `${APIendpointURL}/Expenses/${e.target.parentElement.id}`,
+        "delete"
+      );
+      userList.removeChild(e.target.parentElement);
     }
   }
 }
@@ -134,4 +110,44 @@ function resetData() {
   categoryInput.value = "";
   editing = false;
   btn.value = "Add expense";
+}
+
+// async function for get and delete request
+async function getDelete(requestURL, requestType) {
+  try {
+    const response = await axios({
+      method: requestType,
+      url: requestURL,
+    });
+    if (requestType == "get") {
+      for (let i = 0; i < response.data.length; i++) {
+        showData(response.data[i]);
+      }
+    } else {
+      showMsg("Deleted", "edited");
+    }
+  } catch (err) {
+    showMsg(err.message, "error");
+  }
+}
+
+//async function for post and put request
+async function postPut(requestURL, requestType, obj) {
+  try {
+    const response = await axios({
+      method: requestType,
+      url: requestURL,
+      data: obj,
+    });
+    if (requestType == "put") {
+      showMsg("Expense edited", "edited");
+      editingLi.firstChild.textContent = `${obj.amount}-${obj.category}-${obj.description}`;
+    } else {
+      showMsg("Expense added", "success");
+      showData(response.data);
+    }
+    resetData();
+  } catch (err) {
+    showMsg(err.message, "error");
+  }
 }
