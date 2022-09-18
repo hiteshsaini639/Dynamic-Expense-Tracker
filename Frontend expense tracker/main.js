@@ -9,8 +9,6 @@ const body = document.querySelector("body");
 const btn = document.querySelector(".btn");
 const btndel = document.querySelector(".del");
 const btnedit = document.querySelector(".edit");
-const APIendpointURL =
-  "https://crudcrud.com/api/b32e865ae5184c4fb2677da087a0d32c";
 let editing = false;
 let editingLi;
 
@@ -38,7 +36,7 @@ function showMsg(message, type) {
 
 // show output on frontend
 function showData(obj) {
-  const createTextNode = `<li class="listItem"  id="${obj._id}">${obj.amount}-${obj.category}-${obj.description}<button class="btn1 del">Delete</button><button class="btn1 edit">Edit</button></li>`;
+  const createTextNode = `<li class="listItem"  id="${obj.id}">${obj.amount}-${obj.category}-${obj.description}<button class="btn1 del">Delete</button><button class="btn1 edit">Edit</button></li>`;
   userList.innerHTML += createTextNode;
 }
 
@@ -62,17 +60,17 @@ function submit(event) {
 
     if (editing) {
       //Edit expense
-      postPut(`${APIendpointURL}/Expenses/${editingLi.id}`, "put", obj);
+      postPut(`http://localhost:4000/edit-expense/${editingLi.id}`, "put", obj);
     } else {
       //Add expense
-      postPut(`${APIendpointURL}/Expenses`, "post", obj);
+      postPut(`http://localhost:4000/add-expense`, "post", obj);
     }
   }
 }
 
 // Show data on reload
 function getDataOnLoad() {
-  getDelete(`${APIendpointURL}/Expenses`, "get");
+  getDelete(`http://localhost:4000/get-expenses`, "get");
   resetData();
 }
 
@@ -82,7 +80,7 @@ function deteteData(e) {
     resetData();
     if (confirm("Are You Sure?")) {
       getDelete(
-        `${APIendpointURL}/Expenses/${e.target.parentElement.id}`,
+        `http://localhost:4000/delete-expense/${e.target.parentElement.id}`,
         "delete"
       );
       userList.removeChild(e.target.parentElement);
